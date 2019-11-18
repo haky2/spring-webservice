@@ -4,6 +4,11 @@
 #      enabled: true
 # ddl-auto 설정이 안먹힘 오류발생
 
+server:
+  port: 8080
+  tomcat:
+    uri-encoding: UTF-8
+
 spring:
   profiles:
     active: local # 기본 환경 선택
@@ -21,3 +26,8 @@ spring:
   h2:
     console:
       enabled: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
