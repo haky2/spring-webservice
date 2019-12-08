@@ -43,6 +43,7 @@ dependencies {
     compile 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
     compile('javax.xml.bind:jaxb-api:2.3.0')
 //    compile group: 'org.javassist', name: 'javassist', version: '3.15.0-GA'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 test {
@@ -51,3 +52,53 @@ test {
 
 //Spring Boot Overriding
 ext['hibernate.version'] = '5.2.11.Final'
+
+subprojects {
+    apply plugin: 'java'
+//    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.haky'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
+
+    // 서브 모듈에 공통으로 의존성을 추가 시킬 디펜던시를 정의합니다.
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+//        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    }
+
+    // 해당 task로 서브 모듈 추가시 기초적인 디렉토리를 자동으로 생성해줍니다.
+    task initSourceFolders {
+        sourceSets*.java.srcDirs*.each {
+            if (!it.exists()) {
+                it.mkdirs()
+            }
+        }
+
+        sourceSets*.resources.srcDirs*.each {
+            if (!it.exists()) {
+                it.mkdirs()
+            }
+        }
+    }
+
+}
+
+// project를 정의합니다. 공통으로 사용되는 core 모듈을 추가해 줍니다.
+project(':demo-test') {
+    dependencies {
+        compile('com.h2database:h2')
+    }
+}
