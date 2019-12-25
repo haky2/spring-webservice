@@ -4,6 +4,7 @@ import com.haky.annotation.SocialUser;
 import com.haky.domain.User;
 import com.haky.domain.enums.SocialType;
 import com.haky.repository.UserRepository;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -27,7 +28,6 @@ import static com.haky.domain.enums.SocialType.*;
 
 @Component
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
-
 
     private UserRepository userRepository;
 
@@ -84,7 +84,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private User getKaKaoUser(Map<String, Object> map) {
-        Map<String, String> propertyMap = (HashMap<String, String>) map.get("properties");
+        Map<String, String> propertyMap;
+        propertyMap = (HashMap<String, String>) map.get("properties");
         return User.builder()
                 .name(propertyMap.get("nickname"))
                 .email(String.valueOf(map.get("kaccount_email")))
