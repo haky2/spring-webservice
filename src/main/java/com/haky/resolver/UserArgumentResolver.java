@@ -83,6 +83,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
                 .build();
     }
 
+    @SuppressWarnings("unchecked")
     private User getKaKaoUser(Map<String, Object> map) {
         Map<String, String> propertyMap = (HashMap<String, String>) map.get("properties");
         return User.builder()
