@@ -84,8 +84,7 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
     }
 
     private User getKaKaoUser(Map<String, Object> map) {
-        Map<String, String> propertyMap;
-        propertyMap = (HashMap<String, String>) map.get("properties");
+        Map<String, String> propertyMap = (HashMap<String, String>) map.get("properties");
         return User.builder()
                 .name(propertyMap.get("nickname"))
                 .email(String.valueOf(map.get("kaccount_email")))
