@@ -5,6 +5,7 @@ build/
 !**/src/main/**
 !**/src/test/**
 exam/
+/src/main/resources/oauth.yml
 
 ### STS ###
 .apt_generated
