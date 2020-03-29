@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
 
+    // incheol test
     @GetMapping("/login")
     public String login() {
         return "login";

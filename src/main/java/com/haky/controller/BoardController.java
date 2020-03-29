@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/board")
 public class BoardController {
 
+    // incheol test
     @Autowired
     BoardService boardService;
 
