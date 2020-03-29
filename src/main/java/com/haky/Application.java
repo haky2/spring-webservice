@@ -22,6 +22,7 @@ import java.util.stream.IntStream;
 @SpringBootApplication
 public class Application implements WebMvcConfigurer {
 
+    // incheol test
     private static final String PROPERTIES =
             "spring.config.location="
                     + "classpath:/application.yml"
